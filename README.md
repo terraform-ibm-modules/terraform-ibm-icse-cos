@@ -1,5 +1,7 @@
 <!-- Update the title to match the module name and add a description -->
-# Terraform IBM Module Template
+# Terraform IBM ICSE Cloud Object Storage Module
+
+This module is used to create any numer of Cloud Object Storage Instances, Buckets, and Resource Keys. It also allows users to dynamically create service-to-service authorizations to allow the Object Storage instances to be encrypted by IBM Key Protect or Hyper Protect Crypto Services.
 
 <!-- UPDATE BADGE: Update the link for the badge below-->
 [![Build Status](https://github.com/terraform-ibm-modules/terraform-ibm-module-template/actions/workflows/ci.yml/badge.svg)](https://github.com/terraform-ibm-modules/terraform-ibm-module-template/actions/workflows/ci.yml)
@@ -8,144 +10,99 @@
 
 <!-- Remove the content in this H2 heading after completing the steps -->
 
-## Submit a new module
+---
 
-:+1::tada: Thank you for taking the time to contribute! :tada::+1:
+## Table of Contents
 
-This template repository exists to help you create Terraform modules for IBM Cloud.
+1. [Usage](#usage)
+1. [Examples](#examples)
+1. [Modules](#modules)
+1. [COS Variable](#cos-variable)
+1. [Resources](#resources)
+1. [Inputs](#inputs)
+1. [Outputs](#outputs)
+1. [Contributing](#contributing)
 
-The default structure includes the following files:
 
-- `README.md`: A description of the module
-- `main.tf`: The logic for the module
-- `version.tf`: The required terraform and provider versions
-- `variables.tf`: The input variables for the module
-- `outputs.tf`: The values that are output from the module
-
-For more information, see [Module structure](https://terraform-ibm-modules.github.io/documentation/#/module-structure) in the project documentation.
-
-You can add other content to support what your module does and how it works. For example, you might add a `scripts/` directory that contains shell scripts that are run by a `local-exec` `null_resource` in the Terraform module.
-
-Follow this process to create and submit a Terraform module.
-
-### Create a repo from this repo template
-
-1.  Create a repository from this repository template by clicking `Use this template` in the upper right of the GitHub UI.
-
-    For more information about creating a repository from a template, see the [GitHub docs](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template).
-1.  Select `terraform-ibm-modules` as the owner.
-1.  Enter a name for the module in format `terraform-ibm-<NAME>`, where `<NAME>` reflects the type of infrastructure that the module manages.
-
-    Use hyphens as delimiters for names with multiple words (for example, terraform-ibm-`activity-tracker`).
-1.  Provide a short description of the module.
-
-    The description is displayed under the repository title on the [organization page](https://github.com/terraform-ibm-modules) and in the **About** section of the repository. Use the description to help users understand what your repo does by looking at the description.
-
-### Clone the repo and set up your development environment
-
-Locally clone the new repository and set up your development environment by completing the tasks in [Local development setup](https://terraform-ibm-modules.github.io/documentation/#/local-dev-setup) in the project documentation.
-
-### Update the Terraform files
-
-Implement the logic for your module by updating the `main.tf`, `version.tf`, `variables.tf`, and `outputs.tf` Terraform files. For more information, see [Creating Terraform on IBM Cloud templates](https://cloud.ibm.com/docs/ibm-cloud-provider-for-terraform?topic=ibm-cloud-provider-for-terraform-create-tf-config).
-
-### Create examples and tests
-
-Add one or more examples in the `examples` directory that consume your new module, and configure tests for them in the `tests` directory.
-
-### Update the content in the readme file
-
-After you implement the logic for your module and create examples and tests, update this readme file in your repository by following these steps:
-
-1.  Update the title heading and add a description about your module.
-1.  Update the badge links.
-1.  Remove all the content in this H2 heading section.
-1.  Complete the [Usage](#usage), [Required IAM access policies](#required-iam-access-policies), and [Examples](#examples) sections. The [Requirements](#requirements) section is populated by a pre-commit hook.
-
-### Commit your code and submit your module for review
-
-1.  Before you commit any code, review [Contributing to the IBM Cloud Terraform modules project](https://terraform-ibm-modules.github.io/documentation/#/contribute-module) in the project documentation.
-1.  Create a pull request for review.
-
-### Post-merge steps
-After the first PR for your module is merged, follow these post-merge steps:
-
-1.  Create a PR to enable the upgrade test by removing the `t.Skip` line in `tests/pr_test.go`.
-
-<!-- Remove the content in this previous H2 heading -->
+---
 
 ## Usage
 
-<!--
-Add an example of the use of the module in the following code block.
-
-Use real values instead of "var.<var_name>" or other placeholder values
-unless real values don't help users know what to change.
--->
-
-```hcl
-
+```terraform
+module cos {
+  source                      = "github.com/terraform-ibm-modules/terraform-ibm-icse-cos"
+  region                      = "us-south"
+  prefix                      = "my-prefix"
+  tags                        = var.tags
+  use_random_suffix           = ["icse", "cloud-services"]
+  service_endpoints           = "public"
+  cos                         = [
+    {
+        name = "my-cos-instance"
+    }
+  ]
+}
 ```
 
-## Required IAM access policies
-
-<!-- PERMISSIONS REQUIRED TO RUN MODULE
-If this module requires permissions, uncomment the following block and update
-the sample permissions, following the format.
-Replace the sample Account and IBM Cloud service names and roles with the
-information in the console at
-Manage > Access (IAM) > Access groups > Access policies.
--->
-
-<!--
-You need the following permissions to run this module.
-
-- Account Management
-    - **Sample Account Service** service
-        - `Editor` platform access
-        - `Manager` service access
-- IAM Services
-    - **Sample Cloud Service** service
-        - `Administrator` platform access
--->
-
-<!-- NO PERMISSIONS FOR MODULE
-If no permissions are required for the module, uncomment the following
-statement instead the previous block.
--->
-
-<!-- No permissions are needed to run this module.-->
-
-<!-- BEGIN EXAMPLES HOOK -->
 ## Examples
 
-- [ Default example](examples/default)
-- [ Example that uses existing resources](examples/existing-resources)
-- [ Non default example](examples/non-default)
+- [Examples](examples/basic)
 <!-- END EXAMPLES HOOK -->
+
+
+---
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >=1.0 |
+| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >=1.43.0 |
+| <a name="requirement_random"></a> [random](#requirement\_random) | 3.0.0 |
 
 ## Modules
 
-No modules.
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_cos_bucket_map"></a> [cos\_bucket\_map](#module\_cos\_bucket\_map) | ./config_modules/nested_list_to_map_and_merge | n/a |
+| <a name="module_cos_key_map"></a> [cos\_key\_map](#module\_cos\_key\_map) | ./config_modules/nested_list_to_map_and_merge | n/a |
+| <a name="module_cos_to_key_management"></a> [cos\_to\_key\_management](#module\_cos\_to\_key\_management) | ./config_modules/list_to_map | n/a |
+| <a name="module_encryption_key_map"></a> [encryption\_key\_map](#module\_encryption\_key\_map) | ./config_modules/list_to_map | n/a |
 
 ## Resources
 
-No resources.
+| Name | Type |
+|------|------|
+| [ibm_cos_bucket.bucket](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cos_bucket) | resource |
+| [ibm_iam_authorization_policy.policy](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/iam_authorization_policy) | resource |
+| [ibm_resource_instance.cos](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/resource_instance) | resource |
+| [ibm_resource_key.key](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/resource_key) | resource |
+| [random_string.random_cos_suffix](https://registry.terraform.io/providers/hashicorp/random/3.0.0/docs/resources/string) | resource |
+| [ibm_resource_instance.cos](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/data-sources/resource_instance) | data source |
 
 ## Inputs
 
-No inputs.
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_cos"></a> [cos](#input\_cos) | Object describing the cloud object storage instance, buckets, and keys. Set `use_data` to false to create instance | <pre>list(<br>    object({<br>      name              = string<br>      use_data          = optional(bool)<br>      resource_group_id = optional(string)<br>      plan              = optional(string)<br>      buckets = list(object({<br>        name                  = string<br>        storage_class         = string<br>        endpoint_type         = string<br>        force_delete          = bool<br>        single_site_location  = optional(string)<br>        region_location       = optional(string)<br>        cross_region_location = optional(string)<br>        kms_key               = optional(string)<br>        allowed_ip            = optional(list(string))<br>        hard_quota            = optional(number)<br>        archive_rule = optional(object({<br>          days    = number<br>          enable  = bool<br>          rule_id = optional(string)<br>          type    = string<br>        }))<br>        activity_tracking = optional(object({<br>          activity_tracker_crn = string<br>          read_data_events     = bool<br>          write_data_events    = bool<br>        }))<br>        metrics_monitoring = optional(object({<br>          metrics_monitoring_crn  = string<br>          request_metrics_enabled = optional(bool)<br>          usage_metrics_enabled   = optional(bool)<br>        }))<br>      }))<br>      keys = optional(<br>        list(object({<br>          name        = string<br>          role        = string<br>          enable_HMAC = bool<br>        }))<br>      )<br><br>    })<br>  )</pre> | <pre>[<br>  {<br>    "buckets": [<br>      {<br>        "endpoint_type": "public",<br>        "force_delete": true,<br>        "kms_key": "at-test-atracker-key",<br>        "name": "atracker-bucket",<br>        "storage_class": "standard"<br>      }<br>    ],<br>    "keys": [<br>      {<br>        "enable_HMAC": false,<br>        "name": "cos-bind-key",<br>        "role": "Writer"<br>      }<br>    ],<br>    "name": "atracker-cos",<br>    "plan": "standard",<br>    "random_suffix": true,<br>    "resource_group": "at-test-service-rg",<br>    "use_data": false<br>  },<br>  {<br>    "buckets": [<br>      {<br>        "endpoint_type": "public",<br>        "force_delete": true,<br>        "kms_key": "at-test-slz-key",<br>        "name": "management-bucket",<br>        "storage_class": "standard"<br>      },<br>      {<br>        "endpoint_type": "public",<br>        "force_delete": true,<br>        "kms_key": "at-test-slz-key",<br>        "name": "workload-bucket",<br>        "storage_class": "standard"<br>      },<br>      {<br>        "endpoint_type": "public",<br>        "force_delete": true,<br>        "kms_key": "at-test-slz-key",<br>        "name": "bastion-bucket",<br>        "storage_class": "standard"<br>      }<br>    ],<br>    "keys": [<br>      {<br>        "enable_HMAC": true,<br>        "name": "bastion-key",<br>        "role": "Writer"<br>      }<br>    ],<br>    "name": "cos",<br>    "plan": "standard",<br>    "random_suffix": true,<br>    "resource_group": "at-test-service-rg",<br>    "use_data": false<br>  }<br>]</pre> | no |
+| <a name="input_key_management_keys"></a> [key\_management\_keys](#input\_key\_management\_keys) | List of key management keys from key\_management module | <pre>list(<br>    object({<br>      shortname = string<br>      name      = string<br>      id        = string<br>      crn       = string<br>      key_id    = string<br>    })<br>  )</pre> | `[]` | no |
+| <a name="input_key_management_service_guid"></a> [key\_management\_service\_guid](#input\_key\_management\_service\_guid) | OPTIONAL - GUID of the Key Management Service to use for COS bucket encryption. | `string` | `null` | no |
+| <a name="input_key_management_service_name"></a> [key\_management\_service\_name](#input\_key\_management\_service\_name) | OPTIONAL - Type of key management service to use for COS bucket encryption. Service authorizations will be added only if the GUID is not null. | `string` | `null` | no |
+| <a name="input_prefix"></a> [prefix](#input\_prefix) | The prefix that you would like to append to your resources | `string` | n/a | yes |
+| <a name="input_region"></a> [region](#input\_region) | The region to which to deploy the VPC | `string` | n/a | yes |
+| <a name="input_service_endpoints"></a> [service\_endpoints](#input\_service\_endpoints) | Service endpoints. Can be `public`, `private`, or `public-and-private` | `string` | `"private"` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | List of Tags for the resource created | `list(string)` | `null` | no |
+| <a name="input_use_random_suffix"></a> [use\_random\_suffix](#input\_use\_random\_suffix) | Add a randomize suffix to the end of each resource created in this module. | `bool` | `true` | no |
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_cos_buckets"></a> [cos\_buckets](#output\_cos\_buckets) | List of COS bucket instances with shortname, instance\_shortname, name, id, crn, and instance id. |
+| <a name="output_cos_instances"></a> [cos\_instances](#output\_cos\_instances) | List of COS resource instances with shortname, name, id, and crn. |
+| <a name="output_cos_keys"></a> [cos\_keys](#output\_cos\_keys) | List of COS bucket instances with shortname, instance\_shortname, name, id, crn, and instance id. |
+| <a name="output_cos_suffix"></a> [cos\_suffix](#output\_cos\_suffix) | Random suffix appended to the end of COS resources |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 <!-- Leave this section as is so that your module has a link to local development environment set up steps for contributors to follow -->
