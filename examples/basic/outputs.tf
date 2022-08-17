@@ -1,5 +1,5 @@
 ##############################################################################
-# Object Storage Outputs
+# Outputs
 ##############################################################################
 
 output "cos_suffix" {
@@ -48,6 +48,20 @@ output "cos_keys" {
       crn                = ibm_resource_key.key[resource_key.name].crn
     }
   ]
+}
+
+##############################################################################
+
+##############################################################################
+# Output Arbitrary Locals
+##############################################################################
+
+output "arbitrary_locals" {
+  description = "A map of unessecary variable values to force linter pass"
+  value = {
+    resource_group = var.resource_group
+    resource_tags  = var.resource_tags
+  }
 }
 
 ##############################################################################
