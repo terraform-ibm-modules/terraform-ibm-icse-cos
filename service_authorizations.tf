@@ -19,7 +19,7 @@ module "cos_to_key_management" {
         : ibm_resource_instance.cos[instance.name].id      # otherwise get from resource
       )[7]
     }
-  ]
+  ] # shhh
 }
 
 ##############################################################################
