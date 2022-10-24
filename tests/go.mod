@@ -1,4 +1,4 @@
-module github.com/terraform-ibm-modules/terraform-ibm-icse-key-management-module
+module github.com/terraform-ibm-modules/terraform-ibm-icse-cos
 
 go 1.18
 
