@@ -67,6 +67,12 @@
           "use_data": false
         }
       ],
+      "source": [
+        "data.ibm_resource_instance.cos.for_each",
+        "ibm_resource_instance.cos.for_each",
+        "module.cos_bucket_map",
+        "module.cos_key_map"
+      ],
       "pos": {
         "filename": "variables.tf",
         "line": 75
@@ -77,6 +83,9 @@
       "type": "list(\n    object({\n      shortname = string\n      name      = string\n      id        = string\n      crn       = string\n      key_id    = string\n    })\n  )",
       "description": "List of key management keys from key_management module",
       "default": [],
+      "source": [
+        "module.encryption_key_map"
+      ],
       "pos": {
         "filename": "variables.tf",
         "line": 55
@@ -86,6 +95,9 @@
       "name": "key_management_service_guid",
       "type": "string",
       "description": "OPTIONAL - GUID of the Key Management Service to use for COS bucket encryption.",
+      "source": [
+        "module.cos_to_key_management"
+      ],
       "pos": {
         "filename": "variables.tf",
         "line": 27
@@ -105,10 +117,16 @@
       "type": "string",
       "description": "The prefix that you would like to append to your resources",
       "required": true,
+      "source": [
+        "ibm_cos_bucket.bucket.bucket_name",
+        "ibm_resource_instance.cos.name",
+        "ibm_resource_key.key.name"
+      ],
       "pos": {
         "filename": "variables.tf",
         "line": 10
-      }
+      },
+      "immutable": true
     },
     "region": {
       "name": "region",
@@ -134,9 +152,21 @@
       "name": "tags",
       "type": "list(string)",
       "description": "List of Tags for the resource created",
+      "source": [
+        "ibm_resource_instance.cos.tags",
+        "ibm_resource_key.key.tags"
+      ],
       "pos": {
         "filename": "variables.tf",
         "line": 15
+      },
+      "cloud_data_type": "tags",
+      "min_length": 1,
+      "max_length": 128,
+      "matches": "^[A-Za-z0-9:_ .-]+$",
+      "computed": true,
+      "elem": {
+        "type": "TypeString"
       }
     },
     "use_random_suffix": {
@@ -178,6 +208,7 @@
     "cos_suffix": {
       "name": "cos_suffix",
       "description": "Random suffix appended to the end of COS resources",
+      "value": "local.suffix",
       "pos": {
         "filename": "outputs.tf",
         "line": 5
@@ -299,6 +330,18 @@
       "attributes": {
         "list": "cos"
       },
+      "managed_resources": {},
+      "data_resources": {},
+      "outputs": {
+        "value": {
+          "name": "value",
+          "description": "Map with merged keys",
+          "pos": {
+            "filename": "config_modules/nested_list_to_map_and_merge/outputs.tf",
+            "line": 5
+          }
+        }
+      },
       "pos": {
         "filename": "buckets.tf",
         "line": 5
@@ -309,6 +352,18 @@
       "source": "./config_modules/nested_list_to_map_and_merge",
       "attributes": {
         "list": "cos"
+      },
+      "managed_resources": {},
+      "data_resources": {},
+      "outputs": {
+        "value": {
+          "name": "value",
+          "description": "Map with merged keys",
+          "pos": {
+            "filename": "config_modules/nested_list_to_map_and_merge/outputs.tf",
+            "line": 5
+          }
+        }
       },
       "pos": {
         "filename": "keys.tf",
@@ -321,6 +376,27 @@
       "attributes": {
         "list": "key_management_service_guid"
       },
+      "managed_resources": {},
+      "data_resources": {},
+      "outputs": {
+        "configuration_failure": {
+          "name": "configuration_failure",
+          "description": "Forced output",
+          "value": "local.configuration_failure_conflicting_values_lookup_value_regex_and_value_is_not_null",
+          "pos": {
+            "filename": "config_modules/list_to_map/outputs.tf",
+            "line": 20
+          }
+        },
+        "value": {
+          "name": "value",
+          "description": "List converted into map",
+          "pos": {
+            "filename": "config_modules/list_to_map/outputs.tf",
+            "line": 5
+          }
+        }
+      },
       "pos": {
         "filename": "service_authorizations.tf",
         "line": 5
@@ -331,6 +407,27 @@
       "source": "./config_modules/list_to_map",
       "attributes": {
         "list": "key_management_keys"
+      },
+      "managed_resources": {},
+      "data_resources": {},
+      "outputs": {
+        "configuration_failure": {
+          "name": "configuration_failure",
+          "description": "Forced output",
+          "value": "local.configuration_failure_conflicting_values_lookup_value_regex_and_value_is_not_null",
+          "pos": {
+            "filename": "config_modules/list_to_map/outputs.tf",
+            "line": 20
+          }
+        },
+        "value": {
+          "name": "value",
+          "description": "List converted into map",
+          "pos": {
+            "filename": "config_modules/list_to_map/outputs.tf",
+            "line": 5
+          }
+        }
       },
       "pos": {
         "filename": "buckets.tf",
