@@ -228,13 +228,13 @@ variable "cos" {
     condition = length(var.cos) == 0 ? true : length(
       flatten([
         for instance in var.cos :
-        instance.buckets.*.name
+        instance.buckets[*].name
       ])
       ) == length(
       distinct(
         flatten([
           for instance in var.cos :
-          instance.buckets.*.name
+          instance.buckets[*].name
         ])
       )
     )
