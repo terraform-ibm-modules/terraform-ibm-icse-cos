@@ -1,30 +1,14 @@
+<!-- BEGIN MODULE HOOK -->
+
 <!-- Update the title to match the module name and add a description -->
 # Terraform IBM ICSE Cloud Object Storage Module
-
-This module is used to create any numer of Cloud Object Storage Instances, Buckets, and Resource Keys. It also allows users to dynamically create service-to-service authorizations to allow the Object Storage instances to be encrypted by IBM Key Protect or Hyper Protect Crypto Services.
 
 <!-- UPDATE BADGE: Update the link for the badge below-->
 [![Build Status](https://github.com/terraform-ibm-modules/terraform-ibm-module-template/actions/workflows/ci.yml/badge.svg)](https://github.com/terraform-ibm-modules/terraform-ibm-module-template/actions/workflows/ci.yml)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 
-<!-- Remove the content in this H2 heading after completing the steps -->
-
----
-
-## Table of Contents
-
-1. [Usage](#usage)
-1. [Examples](#examples)
-1. [Modules](#modules)
-1. [COS Variable](#cos-variable)
-1. [Resources](#resources)
-1. [Inputs](#inputs)
-1. [Outputs](#outputs)
-1. [Contributing](#contributing)
-
-
----
+This module creates Cloud Object Storage instances, buckets, and resource keys. It also supports can create service-to-service authorizations dynamically to allow encryption of Cloud Object Storage instances by IBM Key Protect or Hyper Protect Crypto Services.
 
 ## Usage
 
@@ -43,14 +27,12 @@ module cos {
   ]
 }
 ```
-
+<!-- END MODULE HOOK -->
+<!-- BEGIN EXAMPLES HOOK -->
 ## Examples
 
-- [Examples](examples/basic)
+- [Examples](examples)
 <!-- END EXAMPLES HOOK -->
-
-
----
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
@@ -104,11 +86,12 @@ module cos {
 | <a name="output_cos_keys"></a> [cos\_keys](#output\_cos\_keys) | List of COS bucket instances with shortname, instance\_shortname, name, id, crn, and instance id. |
 | <a name="output_cos_suffix"></a> [cos\_suffix](#output\_cos\_suffix) | Random suffix appended to the end of COS resources |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGIN CONTRIBUTING HOOK -->
 
 <!-- Leave this section as is so that your module has a link to local development environment set up steps for contributors to follow -->
-
 ## Contributing
 
-You can report issues and request features for this module in the [terraform-ibm-issue-tracker](https://github.com/terraform-ibm-modules/terraform-ibm-issue-tracker/issues) repo. See [Report an issue or request a feature](https://github.com/terraform-ibm-modules/.github/blob/main/.github/SUPPORT.md).
+You can report issues and request features for this module in GitHub issues in the module repo. See [Report an issue or request a feature](https://github.com/terraform-ibm-modules/.github/blob/main/.github/SUPPORT.md).
 
 To set up your local development environment, see [Local development setup](https://terraform-ibm-modules.github.io/documentation/#/local-dev-setup) in the project documentation.
+<!-- END CONTRIBUTING HOOK -->
