@@ -39,9 +39,9 @@ module cos {
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >=1.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >=1.3.0 |
 | <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >=1.43.0 |
-| <a name="requirement_random"></a> [random](#requirement\_random) | 3.0.0 |
+| <a name="requirement_random"></a> [random](#requirement\_random) | 3.4.3 |
 
 ## Modules
 
@@ -60,7 +60,7 @@ module cos {
 | [ibm_iam_authorization_policy.policy](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/iam_authorization_policy) | resource |
 | [ibm_resource_instance.cos](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/resource_instance) | resource |
 | [ibm_resource_key.key](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/resource_key) | resource |
-| [random_string.random_cos_suffix](https://registry.terraform.io/providers/hashicorp/random/3.0.0/docs/resources/string) | resource |
+| [random_string.random_cos_suffix](https://registry.terraform.io/providers/hashicorp/random/3.4.3/docs/resources/string) | resource |
 | [ibm_resource_instance.cos](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/data-sources/resource_instance) | data source |
 
 ## Inputs
