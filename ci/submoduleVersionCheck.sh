@@ -24,7 +24,7 @@ function get_submodule_version() {
             break
         fi
     done
-    echo "${submodule_id}"
+    echo "${submodule_id}" | xargs
 }
 
 function submodule_exists(){
@@ -58,7 +58,7 @@ echo "submodule_version_current ${submodule_version_current}"
 
         # create temp folder and clone a repo
         temp_dir=$(mktemp -d)
-        echo ${temp_dir}
+        echo "${temp_dir}"
         cd "${temp_dir}"
         git clone "${git_remote_url}"
         cd "$(ls)"
@@ -69,9 +69,7 @@ echo "submodule_version_current ${submodule_version_current}"
         echo "submodule_version_main_branch ${submodule_version_main_branch}"
         if [ "${submodule_version_current}" != "${submodule_version_main_branch}" ]; then
             # update submodule version with remote
-            echo "andro sem tu "
             git submodule update --remote --merge
-            sleep 5
             submodule_version_remote=$(get_submodule_version ${git_submodule_name})
 echo "submodule_version_remote ${submodule_version_remote}"
             if [ "${submodule_version_current}" != "${submodule_version_remote}" ]; then
@@ -80,7 +78,7 @@ echo "submodule_version_remote ${submodule_version_remote}"
                 exit 1
             fi
         fi
-        # rm -fr "${temp_dir}"
+        rm -fr "${temp_dir}"
     fi
 }
 
