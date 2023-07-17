@@ -33,6 +33,7 @@ module cos {
 ## Examples
 
 - [Examples](examples)
+
 <!-- END EXAMPLES HOOK -->
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
