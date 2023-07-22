@@ -37,7 +37,7 @@ module cos {
 <!-- END EXAMPLES HOOK -->
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-## Requirements
+### Requirements
 
 | Name | Version |
 |------|---------|
@@ -45,7 +45,7 @@ module cos {
 | <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >=1.43.0 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | 3.4.3 |
 
-## Modules
+### Modules
 
 | Name | Source | Version |
 |------|--------|---------|
@@ -54,7 +54,7 @@ module cos {
 | <a name="module_cos_to_key_management"></a> [cos\_to\_key\_management](#module\_cos\_to\_key\_management) | ./config_modules/list_to_map | n/a |
 | <a name="module_encryption_key_map"></a> [encryption\_key\_map](#module\_encryption\_key\_map) | ./config_modules/list_to_map | n/a |
 
-## Resources
+### Resources
 
 | Name | Type |
 |------|------|
@@ -65,7 +65,7 @@ module cos {
 | [random_string.random_cos_suffix](https://registry.terraform.io/providers/hashicorp/random/3.4.3/docs/resources/string) | resource |
 | [ibm_resource_instance.cos](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/data-sources/resource_instance) | data source |
 
-## Inputs
+### Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
@@ -79,7 +79,7 @@ module cos {
 | <a name="input_tags"></a> [tags](#input\_tags) | List of Tags for the resource created | `list(string)` | `null` | no |
 | <a name="input_use_random_suffix"></a> [use\_random\_suffix](#input\_use\_random\_suffix) | Add a randomize suffix to the end of each resource created in this module. | `bool` | `true` | no |
 
-## Outputs
+### Outputs
 
 | Name | Description |
 |------|-------------|
