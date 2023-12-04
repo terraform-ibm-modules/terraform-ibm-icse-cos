@@ -47,6 +47,7 @@ resource "ibm_resource_instance" "cos" {
   plan              = each.value.plan
   resource_group_id = each.value.resource_group_id
   tags              = var.tags
+  service_endpoints = var.service_endpoints
 }
 
 ##############################################################################
