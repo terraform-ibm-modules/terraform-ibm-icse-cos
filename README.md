@@ -3,6 +3,13 @@
 <!-- Update the title to match the module name and add a description -->
 # Terraform IBM ICSE Cloud Object Storage Module
 
+## Module archived
+
+:spider_web: This repo is no longer maintained and is archived. Use the following supported public module instead:
+- [terraform-ibm-cos](https://github.com/terraform-ibm-modules/terraform-ibm-cos)
+
+---
+
 <!-- UPDATE BADGE: Update the link for the badge below-->
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
